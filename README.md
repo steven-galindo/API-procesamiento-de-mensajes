@@ -8,7 +8,7 @@ La aplicación recibe, valida, procesa y almacena mensajes con funcionalidades d
 ## Características Principales
 
 - **Procesamiento de Mensajes**: Validación, filtrado y almacenamiento
-- **Filtrado de Contenido**: Detección de palabras prohibidas con similitud fuzzy
+- **Filtrado de Contenido**: Detección de palabras prohibidas con similitud
 - **Metadatos Automáticos**: Conteo de palabras, caracteres y timestamps
 - **Recuperación Avanzada**: Paginación y filtrado por remitente
 - **Autenticación**: API Key authentication
@@ -19,12 +19,12 @@ La aplicación recibe, valida, procesa y almacena mensajes con funcionalidades d
 
 ## Stack Tecnológico
 
-- **Framework**: FastAPI 0
+- **Framework**: FastAPI
 - **Base de Datos**: SQLite con SQLAlchemy ORM
 - **Validación**: Pydantic schemas
 - **Testing**: Pytest con fixtures
 - **Rate Limiting**: Slowapi
-- **Filtrado**: FuzzyWuzzy para similitud de strings
+- **Filtrado**: [FuzzyWuzzy](https://pypi.org/project/fuzzywuzzy/) para similitud de strings
 
 ## Instalación y Configuración
 
@@ -49,7 +49,7 @@ pip install -r src/requirements.txt
 ```
 
 ### 4. Configurar Variables de Entorno
-Crear el archivo `.env` con los siguientes valores por defecto:
+Crear el archivo `.env` en la carpeta 'src/' con los siguientes valores por defecto:
 ```env
 API_KEY=xxxxxxxxxx #Clave de API para autenticación
 API_VERSION=1.0.0 #Versión de la API
@@ -65,7 +65,7 @@ python -m uvicorn main:app --reload
 ## Docker (Recomendado)
 
 Si se desea usar docker:
-- Crear el archivo `.env`
+- Crear el archivo `.env` en 'src/' 
 - Construir y ejecutar el contenedor:
 ```bash
 # Construir imagen
@@ -217,35 +217,36 @@ La cobertura de pruebas se midió con el paquete [coverage] (https://pypi.org/pr
 ```bash
 coverage report --include="src/*"
 ```
-Name                                    Stmts   Miss  Cover
------------------------------------------------------------
-src\controllers\__init__.py                 0      0   100%
-src\controllers\message_controller.py      26      9    65%
-src\core\__init__.py                        0      0   100%
-src\core\auth.py                           14      0   100%
-src\core\database.py                       11      4    64%
-src\core\exceptions.py                     34     13    62%
-src\dependencies\__init__.py                0      0   100%
-src\dependencies\auth.py                    4      1    75%
-src\dependencies\services.py               10      3    70%
-src\main.py                                27      2    93%
-src\models\__init__.py                      0      0   100%
-src\models\message_model.py                12      0   100%
-src\schemas\__init__.py                     0      0   100%
-src\schemas\message_schema.py              33      1    97%
-src\services\__init__.py                    0      0   100%
-src\services\message_service.py            82      1    99%
------------------------------------------------------------
-TOTAL                                     253     34    87%
+| Name                                    | Stmts | Miss | Cover |
+|-----------------------------------------|-------|------|-------|
+| src\controllers\__init__.py             | 0     | 0    | 100%  |
+| src\controllers\message_controller.py   | 26    | 9    | 65%   |
+| src\core\__init__.py                    | 0     | 0    | 100%  |
+| src\core\auth.py                        | 14    | 0    | 100%  |
+| src\core\database.py                    | 11    | 4    | 64%   |
+| src\core\exceptions.py                  | 34    | 13   | 62%   |
+| src\dependencies\__init__.py            | 0     | 0    | 100%  |
+| src\dependencies\auth.py                | 4     | 1    | 75%   |
+| src\dependencies\services.py            | 10    | 3    | 70%   |
+| src\main.py                             | 27    | 2    | 93%   |
+| src\models\__init__.py                  | 0     | 0    | 100%  |
+| src\models\message_model.py             | 12    | 0    | 100%  |
+| src\schemas\__init__.py                 | 0     | 0    | 100%  |
+| src\schemas\message_schema.py           | 33    | 1    | 97%   |
+| src\services\__init__.py                | 0     | 0    | 100%  |
+| src\services\message_service.py         | 82    | 1    | 99%   |
+| **TOTAL**                               | 253   | 34   | 87%   |
+
 
 donde:
+```
 Stmts: número de sentencias ejecutables.
 Miss: sentencias no ejecutadas durante los tests.
 Cover: porcentaje de cobertura de cada archivo.
-
+```
 Las pruebas incluyen: 
 
-** Casos de Éxito:**
+### Casos de Éxito:
 - Procesamiento exitoso de mensajes
 - Mensajes de usuario y sistema
 - Caracteres especiales y Unicode
@@ -253,14 +254,14 @@ Las pruebas incluyen:
 - Múltiples mensajes por sesión
 - Persistencia de datos
 
-** Casos de Error:**
+### Casos de Error:
 - Autenticación fallida
 - API keys inválidas
 - Validación de campos
 - Filtrado de contenido
 - Formatos incorrectos
 
-** Casos Especiales:**
+### Casos Especiales:
 - Rendimiento (< 2 segundos)
 - Caracteres Unicode
 - Mensajes largos o vacíos
@@ -268,8 +269,8 @@ Las pruebas incluyen:
 ##  Arquitectura del Proyecto
 
 ```
-pytest.ini                  # Configuración de pytest 
-run_tests.py                # Script para ejecutar pruebas unitarias e integración
+pytest.ini                 # Configuración de pytest 
+run_tests.py               # Script para ejecutar pruebas unitarias e integración
 src/
 ├── main.py                # Punto de entrada FastAPI
 ├── controllers/           # Controladores de endpoints
@@ -283,7 +284,7 @@ src/
 tests/
 ├── conftest.py            # Configuración pytest
 ├── test_integration/      # Tests de endpoints
-└── test_services/            # Tests de logica de negocio
+└── test_services/         # Tests de logica de negocio
 ```
 
 
