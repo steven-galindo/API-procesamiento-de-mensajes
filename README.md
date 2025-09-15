@@ -302,10 +302,12 @@ Editar en `src/main.py` y `src/controllers/message_controller.py`:
 
 ```bash
 # Crear mensaje
-curl -X POST "http://localhost:8000/api/messages/" \
-     -H "X-API-Key: api-key-default-123" \
-     -H "Content-Type: application/json" \
-     -d '{
+curl -X 'POST' \
+  'http://localhost:8000/api/messages/' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: api-key-default-123' \
+  -H 'Content-Type: application/json' \
+  -d '{
        "message_id": "msg-001",
        "session_id": "session-abc",
        "content": "Hola mundo",
@@ -314,10 +316,11 @@ curl -X POST "http://localhost:8000/api/messages/" \
      }'
 
 # Obtener mensajes
-curl -X GET "http://localhost:8000/api/messages/session-abc?limit=10&sender=user" \
-     -H "X-API-Key: api-key-default-123"
+curl -X 'GET' \
+  'http://localhost:8000/api/messages/session-abc?limit=100&offset=0' \
+  -H 'accept: application/json' \
+  -H 'X-API-Key: api-key-default-123'
 ```
-
 
 ## Documentación Interactiva
 
